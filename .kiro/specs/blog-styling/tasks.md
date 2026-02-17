@@ -21,39 +21,39 @@ Use whichever pattern fits the work breakdown:
 > **Optional test coverage**: When a sub-task is deferrable test work tied to acceptance criteria, mark the checkbox as `- [ ]*` and explain the referenced requirements in the detail bullets.
 
 - [ ] 1. Create directory structure for CSS and JavaScript assets
-- [ ] 1.1 Create CSS directory
+- [x] 1.1 Create CSS directory
   - Create `public/css/` directory
   - Ensure directory exists for stylesheet file
   - _Requirements: 7.1_
 
-- [ ] 1.2 Create JavaScript directory
+- [x] 1.2 Create JavaScript directory
   - Create `public/js/` directory
   - Ensure directory exists for script file
   - _Requirements: 7.2_
 
 - [ ] 2. Implement CSS styling foundation
-- [ ] 2.1 Define CSS custom properties and color scheme
+- [x] 2.1 Define CSS custom properties and color scheme
   - Create CSS custom properties (variables) for color scheme
   - Define background colors, text colors, link colors, and accent colors
   - Ensure color contrast ratios meet WCAG AA standards (4.5:1 for normal text)
   - Use CSS `:root` selector for global variables
   - _Requirements: 1.1, 8.2_
 
-- [ ] 2.2 Establish typography system
+- [x] 2.2 Establish typography system
   - Define font families using system font stack
   - Set base font size and line height for readability
   - Define font weights for headings and body text
   - Create typography scale for different heading levels
   - _Requirements: 1.2_
 
-- [ ] 2.3 Define spacing and layout rules
+- [x] 2.3 Define spacing and layout rules
   - Create spacing unit system using rem units
   - Define container widths and max-widths for content areas
   - Establish consistent margin and padding rules
   - Set up layout structure for page containers
   - _Requirements: 1.3_
 
-- [ ] 2.4 Style base HTML elements
+- [x] 2.4 Style base HTML elements
   - Style headings (h1-h6) with appropriate hierarchy
   - Style paragraphs with readable line height and spacing
   - Style lists (ul, ol) with appropriate indentation and spacing
@@ -62,7 +62,7 @@ Use whichever pattern fits the work breakdown:
   - Ensure all base elements have consistent styling
   - _Requirements: 1.4, 8.3_
 
-- [ ] 2.5 Organize CSS file structure
+- [x] 2.5 Organize CSS file structure
   - Organize CSS with clear sections: variables, base styles, layout, components, responsive
   - Add comments to separate sections for maintainability
   - Ensure logical flow from general to specific styles
