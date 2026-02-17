@@ -13,7 +13,9 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.ignores.add("eleventy.config.js");
   eleventyConfig.ignores.add(".gitignore");
 
-  eleventyConfig.addPassthroughCopy("public");
+  // Copy CSS and JS assets to site root for direct access
+  eleventyConfig.addPassthroughCopy({ "public/css": "css" });
+  eleventyConfig.addPassthroughCopy({ "public/js": "js" });
 
   eleventyConfig.addFilter("date", function (dateInput, format) {
     const d = new Date(dateInput);

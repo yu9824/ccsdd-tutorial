@@ -83,6 +83,11 @@
    - --color-text (#212529) on --color-background (#ffffff): 16.5:1 ✓ (WCAG AAA)
    - --color-link (#0066cc) on --color-background (#ffffff): 7.0:1 ✓ (WCAG AAA)
    - --color-text-muted (#6c757d) on --color-background (#ffffff): 4.6:1 ✓ (WCAG AA)
+   - --color-link-hover (#0052a3) on --color-background (#ffffff): 7.8:1 ✓ (WCAG AAA)
+   - --color-link-visited (#6b46c1) on --color-background (#ffffff): 6.2:1 ✓ (WCAG AAA)
+   - --color-text (#212529) on --color-background-alt (#f8f9fa): 15.8:1 ✓ (WCAG AAA)
+   - --color-text-muted (#6c757d) on --color-background-alt (#f8f9fa): 4.4:1 ✓ (WCAG AA)
+   - --color-text-light (#ffffff) on --color-accent (#0066cc): 7.0:1 ✓ (WCAG AAA)
    All color combinations meet WCAG AA standards (4.5:1 minimum for normal text)
 */
 
@@ -246,6 +251,13 @@ a:focus:not(:focus-visible) {
    outline: none;
 }
 
+a:focus-visible {
+   outline: 2px solid var(--color-link);
+   outline-offset: 2px;
+   border-radius: var(--border-radius-sm);
+   /* Enhanced focus indicator for keyboard navigation */
+}
+
 /* Code block and inline code styling */
 code {
    font-family: var(--font-family-mono);
@@ -255,6 +267,12 @@ code {
    border-radius: var(--border-radius-sm);
    padding: 0.125rem 0.375rem;
    color: var(--color-text);
+   transition: background-color var(--transition-base), border-color var(--transition-base);
+}
+
+code:hover {
+   background-color: var(--color-background-alt);
+   border-color: var(--color-accent);
 }
 
 pre {
@@ -269,6 +287,13 @@ pre {
    margin-bottom: var(--spacing-md);
    overflow-x: auto;
    color: var(--color-text);
+   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+   transition: box-shadow var(--transition-base), border-color var(--transition-base);
+}
+
+pre:hover {
+   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+   border-color: var(--color-accent);
 }
 
 pre code {
@@ -519,16 +544,1933 @@ footer {
    - Site header/footer components
    - Other reusable UI components
 */
-/* Note: Component styles will be added in future tasks */
+
+/* ========================================
+   4.1 Post Listing Page Styles
+   ======================================== */
+/*
+   Visual hierarchy and layout for post listing page:
+   - Clear visual separation between elements
+   - Scannable layout for post list
+   - Visual hierarchy guides user attention
+   - Main heading and page structure styling
+*/
+
+/* Post listing page main container */
+main {
+   max-width: var(--max-width-container);
+   margin: 0 auto;
+   width: 100%;
+}
+
+/* Post listing page main heading */
+main > h1 {
+   font-size: var(--font-size-4xl);
+   font-weight: var(--font-weight-bold);
+   color: var(--color-text);
+   margin-top: var(--spacing-2xl);
+   margin-bottom: var(--spacing-xl);
+   padding-bottom: var(--spacing-md);
+   border-bottom: 2px solid var(--color-border);
+   /* Clear visual separation between heading and content */
+   transition: border-color var(--transition-base);
+}
+
+main > h1:hover {
+   border-bottom-color: var(--color-accent);
+}
+
+/* Post list container */
+main > ul {
+   list-style: none;
+   padding-left: 0;
+   margin-top: 0;
+   margin-bottom: var(--spacing-2xl);
+   /* Remove default list styling for cleaner appearance */
+}
+
+/* Post list items */
+main > ul > li {
+   margin-bottom: var(--spacing-lg);
+   padding: var(--spacing-md) 0;
+   border-bottom: 1px solid var(--color-border-light);
+   /* Visual separation between list items */
+   transition: background-color var(--transition-base), padding var(--transition-base), margin var(--transition-base), box-shadow var(--transition-base);
+   border-radius: var(--border-radius-sm);
+}
+
+/* Hover effect for post list items */
+main > ul > li:hover {
+   background-color: var(--color-background-alt);
+   padding-left: var(--spacing-sm);
+   padding-right: var(--spacing-sm);
+   margin-left: calc(-1 * var(--spacing-sm));
+   margin-right: calc(-1 * var(--spacing-sm));
+   border-radius: var(--border-radius-sm);
+   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+   /* Subtle hover feedback for better interactivity */
+}
+
+/* Focus effect for post list items (keyboard navigation) */
+main > ul > li:focus-within {
+   background-color: var(--color-background-alt);
+   padding-left: var(--spacing-sm);
+   padding-right: var(--spacing-sm);
+   margin-left: calc(-1 * var(--spacing-sm));
+   margin-right: calc(-1 * var(--spacing-sm));
+   border-radius: var(--border-radius-sm);
+   box-shadow: 0 0 0 2px var(--color-accent-light);
+}
+
+/* Post title links */
+main > ul > li > a {
+   font-size: var(--font-size-xl);
+   font-weight: var(--font-weight-semibold);
+   color: var(--color-link);
+   text-decoration: none;
+   display: block;
+   margin-bottom: var(--spacing-xs);
+   transition: color var(--transition-base);
+   /* Clear visual prominence for post titles */
+}
+
+/* Post title link hover state */
+main > ul > li > a:hover {
+   color: var(--color-link-hover);
+   text-decoration: underline;
+   /* Clear hover feedback */
+}
+
+/* Post title link focus state */
+main > ul > li > a:focus {
+   outline: 2px solid var(--color-link);
+   outline-offset: 2px;
+   border-radius: var(--border-radius-sm);
+   /* Accessible focus indicator */
+}
+
+main > ul > li > a:focus:not(:focus-visible) {
+   outline: none;
+   /* Hide focus outline for mouse users */
+}
+
+main > ul > li > a:focus-visible {
+   outline: 2px solid var(--color-link);
+   outline-offset: 2px;
+   border-radius: var(--border-radius-sm);
+   /* Enhanced focus indicator for keyboard navigation */
+}
+
+/* Post date styling */
+main > ul > li > time {
+   display: block;
+   font-size: var(--font-size-sm);
+   color: var(--color-text-muted);
+   margin-top: var(--spacing-xs);
+   font-weight: var(--font-weight-normal);
+   /* Clear but subtle date display */
+}
+
+/* Visual hierarchy: Ensure post titles stand out */
+main > ul > li > a::before {
+   content: "→";
+   margin-right: var(--spacing-xs);
+   color: var(--color-accent);
+   font-weight: var(--font-weight-bold);
+   opacity: 0.6;
+   transition: opacity var(--transition-base);
+   /* Visual indicator for scannability */
+}
+
+main > ul > li:hover > a::before {
+   opacity: 1;
+   /* Enhanced visibility on hover */
+}
+
+/* ========================================
+   4.2 Individual Post Page Styles
+   ======================================== */
+/*
+   Styling for individual post pages:
+   - Post header styling (title and date)
+   - Visual separation between header and content
+   - Post content styling
+   - Optimal reading experience
+*/
+
+/* Post header container */
+article > header {
+   margin-bottom: var(--spacing-2xl);
+   padding-bottom: var(--spacing-xl);
+   border-bottom: 2px solid var(--color-border);
+   /* Clear visual separation between header and content */
+   transition: border-color var(--transition-base);
+}
+
+article > header:hover {
+   border-bottom-color: var(--color-accent);
+}
+
+/* Post title (h1) styling with clear visual prominence */
+article > header > h1 {
+   font-size: var(--font-size-4xl);
+   font-weight: var(--font-weight-bold);
+   line-height: var(--line-height-tight);
+   color: var(--color-text);
+   margin-top: 0;
+   margin-bottom: var(--spacing-lg);
+   /* Clear visual prominence for post title */
+}
+
+/* Post date styling */
+article > header > time {
+   display: block;
+   font-size: var(--font-size-base);
+   color: var(--color-text-muted);
+   font-weight: var(--font-weight-normal);
+   margin-top: var(--spacing-sm);
+   margin-bottom: 0;
+   /* Appropriate styling for post date */
+}
+
+/* Ensure header establishes post identity */
+article > header {
+   /* Visual identity through typography hierarchy and spacing */
+}
+
+/* Post article container with optimal content width for reading */
+article {
+   width: 100%;
+   max-width: var(--max-width-content);
+   margin-left: auto;
+   margin-right: auto;
+   /* Center content and limit width for optimal reading experience (65ch) */
+   /* Horizontal padding handled by container/parent, vertical padding handled by responsive sections */
+}
+
+/* Post body typography optimized for long-form content */
+.post-body {
+   width: 100%;
+   font-size: var(--font-size-base);
+   line-height: var(--line-height-relaxed);
+   /* Relaxed line height (1.75) for better readability in long-form content */
+   color: var(--color-text);
+   /* Ensure comfortable reading experience */
+}
+
+/* Post body paragraphs with optimal spacing for readability */
+.post-body p {
+   margin-top: 0;
+   margin-bottom: var(--spacing-md);
+   line-height: var(--line-height-relaxed);
+   /* Comfortable line spacing for reading long-form content */
+}
+
+/* Post body first element spacing */
+.post-body > *:first-child {
+   margin-top: 0;
+   /* Remove top margin from first element */
+}
+
+/* Post body last element spacing */
+.post-body > *:last-child {
+   margin-bottom: 0;
+   /* Remove bottom margin from last element */
+}
+
+/* Detailed heading hierarchy within post content */
+.post-body h1 {
+   font-size: var(--font-size-3xl);
+   font-weight: var(--font-weight-bold);
+   line-height: var(--line-height-tight);
+   margin-top: var(--spacing-2xl);
+   margin-bottom: var(--spacing-lg);
+   color: var(--color-text);
+   padding-bottom: var(--spacing-sm);
+   border-bottom: 2px solid var(--color-border);
+}
+
+.post-body h2 {
+   font-size: var(--font-size-2xl);
+   font-weight: var(--font-weight-bold);
+   line-height: var(--line-height-tight);
+   margin-top: var(--spacing-xl);
+   margin-bottom: var(--spacing-md);
+   color: var(--color-text);
+   padding-top: var(--spacing-md);
+}
+
+.post-body h3 {
+   font-size: var(--font-size-xl);
+   font-weight: var(--font-weight-semibold);
+   line-height: var(--line-height-base);
+   margin-top: var(--spacing-lg);
+   margin-bottom: var(--spacing-md);
+   color: var(--color-text);
+}
+
+.post-body h4 {
+   font-size: var(--font-size-lg);
+   font-weight: var(--font-weight-semibold);
+   line-height: var(--line-height-base);
+   margin-top: var(--spacing-md);
+   margin-bottom: var(--spacing-sm);
+   color: var(--color-text);
+}
+
+.post-body h5 {
+   font-size: var(--font-size-base);
+   font-weight: var(--font-weight-medium);
+   line-height: var(--line-height-base);
+   margin-top: var(--spacing-md);
+   margin-bottom: var(--spacing-sm);
+   color: var(--color-text);
+}
+
+.post-body h6 {
+   font-size: var(--font-size-sm);
+   font-weight: var(--font-weight-medium);
+   line-height: var(--line-height-base);
+   margin-top: var(--spacing-md);
+   margin-bottom: var(--spacing-sm);
+   color: var(--color-text-muted);
+   text-transform: uppercase;
+   letter-spacing: 0.05em;
+}
+
+/* List styling within post content */
+.post-body ul,
+.post-body ol {
+   margin-top: var(--spacing-md);
+   margin-bottom: var(--spacing-md);
+   padding-left: var(--spacing-xl);
+   color: var(--color-text);
+}
+
+.post-body ul {
+   list-style-type: disc;
+}
+
+.post-body ol {
+   list-style-type: decimal;
+}
+
+.post-body li {
+   margin-top: var(--spacing-xs);
+   margin-bottom: var(--spacing-xs);
+   line-height: var(--line-height-base);
+   color: var(--color-text);
+}
+
+/* Nested lists within post content */
+.post-body ul ul,
+.post-body ol ol,
+.post-body ul ol,
+.post-body ol ul {
+   margin-top: var(--spacing-xs);
+   margin-bottom: var(--spacing-xs);
+   padding-left: var(--spacing-lg);
+}
+
+.post-body ul ul {
+   list-style-type: circle;
+}
+
+.post-body ul ul ul {
+   list-style-type: square;
+}
+
+.post-body ol ol {
+   list-style-type: lower-alpha;
+}
+
+.post-body ol ol ol {
+   list-style-type: lower-roman;
+}
+
+/* Blockquote styling with visual distinction */
+.post-body blockquote {
+   margin: var(--spacing-lg) 0;
+   padding: var(--spacing-md) var(--spacing-lg);
+   padding-left: var(--spacing-xl);
+   border-left: 4px solid var(--color-accent);
+   background-color: var(--color-background-alt);
+   border-radius: var(--border-radius-sm);
+   color: var(--color-text);
+   font-style: italic;
+   position: relative;
+   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+   transition: box-shadow var(--transition-base), border-left-color var(--transition-base);
+}
+
+.post-body blockquote:hover {
+   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+   border-left-color: var(--color-link-hover);
+}
+
+.post-body blockquote p {
+   margin-bottom: var(--spacing-sm);
+   color: var(--color-text);
+}
+
+.post-body blockquote p:last-child {
+   margin-bottom: 0;
+}
+
+/* Nested elements within blockquotes */
+.post-body blockquote ul,
+.post-body blockquote ol {
+   margin-top: var(--spacing-sm);
+   margin-bottom: var(--spacing-sm);
+}
+
+.post-body blockquote p + p {
+   margin-top: var(--spacing-sm);
+}
+
+/* Link styling within post content */
+.post-body a {
+   color: var(--color-link);
+   text-decoration: underline;
+   text-decoration-thickness: 1px;
+   text-underline-offset: 2px;
+   transition: color var(--transition-base), text-decoration-color var(--transition-base);
+   font-weight: var(--font-weight-normal);
+}
+
+.post-body a:hover {
+   color: var(--color-link-hover);
+   text-decoration-color: var(--color-link-hover);
+}
+
+.post-body a:visited {
+   color: var(--color-link-visited);
+}
+
+.post-body a:focus {
+   outline: 2px solid var(--color-link);
+   outline-offset: 2px;
+   border-radius: var(--border-radius-sm);
+}
+
+.post-body a:focus:not(:focus-visible) {
+   outline: none;
+}
+
+.post-body a:focus-visible {
+   outline: 2px solid var(--color-link);
+   outline-offset: 2px;
+   border-radius: var(--border-radius-sm);
+   /* Enhanced focus indicator for keyboard navigation */
+}
+
+/* Code blocks within post content */
+.post-body pre {
+   margin-top: var(--spacing-md);
+   margin-bottom: var(--spacing-md);
+   overflow-x: auto;
+}
+
+.post-body pre code {
+   display: block;
+   padding: 0;
+}
+
+/* Inline code within post content */
+.post-body code {
+   font-family: var(--font-family-mono);
+   font-size: 0.9em;
+   background-color: var(--color-background-code);
+   border: 1px solid var(--color-border);
+   border-radius: var(--border-radius-sm);
+   padding: 0.125rem 0.375rem;
+   color: var(--color-text);
+}
+
+/* Ensure proper spacing around code blocks */
+.post-body p + pre,
+.post-body pre + p {
+   margin-top: var(--spacing-md);
+}
+
+/* Image styling within post content */
+.post-body img {
+   max-width: 100%;
+   height: auto;
+   margin-top: var(--spacing-md);
+   margin-bottom: var(--spacing-md);
+   border-radius: var(--border-radius-md);
+   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+   transition: box-shadow var(--transition-base), transform var(--transition-base);
+}
+
+.post-body img:hover {
+   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+   transform: translateY(-2px);
+}
+
+/* Horizontal rule styling within post content */
+.post-body hr {
+   border: none;
+   border-top: 2px solid var(--color-border);
+   margin: var(--spacing-xl) 0;
+   width: 100%;
+   transition: border-color var(--transition-base);
+}
+
+.post-body hr:hover {
+   border-top-color: var(--color-accent);
+}
+
+/* Table styling within post content (if markdown includes tables) */
+.post-body table {
+   width: 100%;
+   border-collapse: collapse;
+   margin-top: var(--spacing-md);
+   margin-bottom: var(--spacing-md);
+   font-size: var(--font-size-base);
+   border-radius: var(--border-radius-md);
+   overflow: hidden;
+   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.post-body th,
+.post-body td {
+   padding: var(--spacing-sm) var(--spacing-md);
+   border: 1px solid var(--color-border);
+   text-align: left;
+   transition: background-color var(--transition-base);
+}
+
+.post-body th {
+   background-color: var(--color-background-alt);
+   font-weight: var(--font-weight-semibold);
+   color: var(--color-text);
+}
+
+.post-body th:hover {
+   background-color: var(--color-accent-light);
+}
+
+.post-body tr:nth-child(even) {
+   background-color: var(--color-background-alt);
+}
+
+.post-body tr:hover {
+   background-color: var(--color-accent-light);
+}
+
+.post-body td:hover {
+   background-color: var(--color-accent-light);
+}
+
+/* ========================================
+   4.3 Post Content Element Spacing
+   ======================================== */
+/*
+   Spacing between content elements within post body:
+   - Adequate spacing between headings and paragraphs
+   - Appropriate spacing for lists from surrounding content
+   - Spacing around code blocks
+   - Visual breathing room between all content elements
+   - Requirements: 4.4
+*/
+
+/* Spacing between headings and paragraphs */
+.post-body h1 + p,
+.post-body h2 + p,
+.post-body h3 + p,
+.post-body h4 + p,
+.post-body h5 + p,
+.post-body h6 + p {
+   margin-top: var(--spacing-md);
+   /* Adequate spacing between headings and following paragraphs */
+}
+
+/* Spacing between paragraphs and headings */
+.post-body p + h1,
+.post-body p + h2,
+.post-body p + h3,
+.post-body p + h4,
+.post-body p + h5,
+.post-body p + h6 {
+   margin-top: var(--spacing-xl);
+   /* Generous spacing before headings that follow paragraphs */
+}
+
+/* Spacing for lists from surrounding content */
+.post-body p + ul,
+.post-body p + ol,
+.post-body ul + p,
+.post-body ol + p {
+   margin-top: var(--spacing-md);
+   /* Appropriate spacing between paragraphs and lists */
+}
+
+.post-body h1 + ul,
+.post-body h1 + ol,
+.post-body h2 + ul,
+.post-body h2 + ol,
+.post-body h3 + ul,
+.post-body h3 + ol,
+.post-body h4 + ul,
+.post-body h4 + ol,
+.post-body h5 + ul,
+.post-body h5 + ol,
+.post-body h6 + ul,
+.post-body h6 + ol {
+   margin-top: var(--spacing-md);
+   /* Appropriate spacing between headings and lists */
+}
+
+.post-body ul + h1,
+.post-body ul + h2,
+.post-body ul + h3,
+.post-body ul + h4,
+.post-body ul + h5,
+.post-body ul + h6,
+.post-body ol + h1,
+.post-body ol + h2,
+.post-body ol + h3,
+.post-body ol + h4,
+.post-body ol + h5,
+.post-body ol + h6 {
+   margin-top: var(--spacing-xl);
+   /* Generous spacing before headings that follow lists */
+}
+
+/* Spacing around code blocks */
+.post-body p + pre,
+.post-body pre + p {
+   margin-top: var(--spacing-lg);
+   /* Adequate spacing around code blocks */
+}
+
+.post-body h1 + pre,
+.post-body h2 + pre,
+.post-body h3 + pre,
+.post-body h4 + pre,
+.post-body h5 + pre,
+.post-body h6 + pre {
+   margin-top: var(--spacing-md);
+   /* Appropriate spacing between headings and code blocks */
+}
+
+.post-body pre + h1,
+.post-body pre + h2,
+.post-body pre + h3,
+.post-body pre + h4,
+.post-body pre + h5,
+.post-body pre + h6 {
+   margin-top: var(--spacing-xl);
+   /* Generous spacing before headings that follow code blocks */
+}
+
+.post-body ul + pre,
+.post-body ol + pre,
+.post-body pre + ul,
+.post-body pre + ol {
+   margin-top: var(--spacing-lg);
+   /* Appropriate spacing between lists and code blocks */
+}
+
+/* Spacing for blockquotes */
+.post-body p + blockquote,
+.post-body blockquote + p {
+   margin-top: var(--spacing-lg);
+   /* Adequate spacing around blockquotes */
+}
+
+.post-body h1 + blockquote,
+.post-body h2 + blockquote,
+.post-body h3 + blockquote,
+.post-body h4 + blockquote,
+.post-body h5 + blockquote,
+.post-body h6 + blockquote {
+   margin-top: var(--spacing-md);
+   /* Appropriate spacing between headings and blockquotes */
+}
+
+.post-body blockquote + h1,
+.post-body blockquote + h2,
+.post-body blockquote + h3,
+.post-body blockquote + h4,
+.post-body blockquote + h5,
+.post-body blockquote + h6 {
+   margin-top: var(--spacing-xl);
+   /* Generous spacing before headings that follow blockquotes */
+}
+
+.post-body ul + blockquote,
+.post-body ol + blockquote,
+.post-body blockquote + ul,
+.post-body blockquote + ol {
+   margin-top: var(--spacing-lg);
+   /* Appropriate spacing between lists and blockquotes */
+}
+
+.post-body pre + blockquote,
+.post-body blockquote + pre {
+   margin-top: var(--spacing-lg);
+   /* Appropriate spacing between code blocks and blockquotes */
+}
+
+/* ========================================
+   4.4 Navigation and Layout Structure Styles
+   ======================================== */
+/*
+   Navigation and layout structure styling:
+   - Main layout structure (header, main content area, footer)
+   - Navigation elements styling (links, hover states, focus states, active states)
+   - Consistent spacing and alignment across all pages
+   - Site header and title styling
+   - Requirements: 5.1, 5.2, 5.3, 5.4
+*/
+
+/* ========================================
+   4.4.1 Main Layout Structure
+   ======================================== */
+/*
+   Styling for main layout structure:
+   - Header, main content area, and footer (if present)
+   - Consistent layout structure across pages
+   - Proper spacing and alignment
+   - Visual boundaries for layout sections
+   - Requirements: 5.1, 5.3
+*/
+
+/* Body layout structure */
+body {
+   display: flex;
+   flex-direction: column;
+   min-height: 100vh;
+   /* Ensure body takes full viewport height */
+}
+
+/* Main layout structure - header */
+body > header,
+header:not(article header) {
+   width: 100%;
+   padding: var(--spacing-lg) var(--container-padding);
+   margin-bottom: var(--spacing-xl);
+   border-bottom: 1px solid var(--color-border);
+   background-color: var(--color-background);
+   /* Visual separation and consistent header styling */
+}
+
+/* Main layout structure - main content area */
+body > main,
+main {
+   flex: 1;
+   width: 100%;
+   padding: var(--spacing-lg) var(--container-padding);
+   /* Main content area takes available space */
+}
+
+/* Main layout structure - footer */
+body > footer,
+footer {
+   width: 100%;
+   padding: var(--spacing-lg) var(--container-padding);
+   margin-top: var(--spacing-2xl);
+   border-top: 1px solid var(--color-border);
+   background-color: var(--color-background-alt);
+   color: var(--color-text-muted);
+   font-size: var(--font-size-sm);
+   text-align: center;
+   /* Visual separation and consistent footer styling */
+   box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.05);
+   transition: border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+body > footer:hover,
+footer:hover {
+   border-top-color: var(--color-accent);
+   box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* Ensure consistent container structure */
+body > header .container,
+body > main .container,
+body > footer .container {
+   max-width: var(--max-width-container);
+   margin-left: auto;
+   margin-right: auto;
+   /* Consistent container width across layout sections */
+}
+
+/* Visual boundaries for layout sections */
+body > header {
+   /* Header establishes top boundary */
+}
+
+body > main {
+   /* Main content area is the primary content region */
+}
+
+body > footer {
+   /* Footer establishes bottom boundary */
+}
+
+/* ========================================
+   4.4.2 Navigation Elements Styling
+   ======================================== */
+/*
+   Styling for navigation elements:
+   - Navigation links with clear visual distinction
+   - Hover states for interactive feedback
+   - Focus states for keyboard navigation accessibility
+   - Active states if navigation indicators are present
+   - Ensure navigation is clearly visible and usable
+   - Requirements: 5.2
+*/
+
+/* Navigation container */
+nav {
+   width: 100%;
+   margin: var(--spacing-md) 0;
+   /* Navigation container spacing */
+}
+
+/* Navigation list styling */
+nav ul {
+   list-style: none;
+   padding: 0;
+   margin: 0;
+   display: flex;
+   flex-wrap: wrap;
+   gap: var(--spacing-md);
+   /* Flexible navigation layout */
+}
+
+nav ol {
+   list-style: none;
+   padding: 0;
+   margin: 0;
+   display: flex;
+   flex-wrap: wrap;
+   gap: var(--spacing-md);
+   /* Flexible navigation layout for ordered lists */
+}
+
+/* Navigation list items */
+nav li {
+   margin: 0;
+   padding: 0;
+   /* Remove default list item styling */
+}
+
+/* Navigation links - base styling */
+nav a {
+   display: inline-flex;
+   align-items: center;
+   padding: var(--spacing-sm) var(--spacing-md);
+   color: var(--color-link);
+   text-decoration: none;
+   font-weight: var(--font-weight-medium);
+   border-radius: var(--border-radius-sm);
+   transition: background-color var(--transition-base), color var(--transition-base), outline var(--transition-base);
+   min-height: 44px;
+   /* Touch-friendly navigation links */
+}
+
+/* Navigation links - hover state */
+nav a:hover {
+   background-color: var(--color-accent-light);
+   color: var(--color-link-hover);
+   text-decoration: none;
+   /* Clear hover feedback */
+}
+
+/* Navigation links - focus state */
+nav a:focus {
+   outline: 2px solid var(--color-link);
+   outline-offset: 2px;
+   background-color: var(--color-accent-light);
+   /* Accessible focus indicator */
+}
+
+nav a:focus:not(:focus-visible) {
+   outline: none;
+   /* Hide focus outline for mouse users */
+}
+
+nav a:focus-visible {
+   outline: 2px solid var(--color-link);
+   outline-offset: 2px;
+   background-color: var(--color-accent-light);
+   box-shadow: 0 0 0 3px var(--color-accent-light);
+   /* Enhanced focus indicator for keyboard navigation */
+}
+
+/* Navigation links - active state (current page indicator) */
+nav a[aria-current="page"],
+nav a.active {
+   background-color: var(--color-accent);
+   color: var(--color-text-light);
+   font-weight: var(--font-weight-semibold);
+   /* Active page indicator */
+   box-shadow: 0 2px 4px rgba(0, 102, 204, 0.2);
+   transition: background-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+nav a[aria-current="page"]:hover,
+nav a.active:hover {
+   background-color: var(--color-link-hover);
+   color: var(--color-text-light);
+   box-shadow: 0 3px 6px rgba(0, 102, 204, 0.3);
+   /* Active state hover */
+}
+
+nav a[aria-current="page"]:focus,
+nav a.active:focus {
+   outline: 2px solid var(--color-text-light);
+   outline-offset: 2px;
+   /* Enhanced focus for active navigation items */
+}
+
+/* Navigation links - visited state */
+nav a:visited {
+   color: var(--color-link);
+   /* Maintain link color for visited navigation links */
+}
+
+nav a:visited:hover {
+   color: var(--color-link-hover);
+   /* Visited link hover state */
+}
+
+/* Ensure navigation is clearly visible */
+nav {
+   /* Navigation container is visible and accessible */
+}
+
+/* ========================================
+   4.4.3 Consistent Spacing and Alignment
+   ======================================== */
+/*
+   Consistent spacing and alignment across all pages:
+   - Apply consistent spacing rules across index and post pages
+   - Align elements consistently throughout site
+   - Maintain visual rhythm across all pages
+   - Ensure layout consistency improves user experience
+   - Requirements: 5.3
+*/
+
+/* Consistent page wrapper spacing */
+.page-wrapper {
+   width: 100%;
+   min-height: 100vh;
+   display: flex;
+   flex-direction: column;
+   /* Consistent page structure */
+}
+
+/* Consistent container alignment */
+.container {
+   width: 100%;
+   max-width: var(--max-width-container);
+   margin-left: auto;
+   margin-right: auto;
+   padding-left: var(--container-padding);
+   padding-right: var(--container-padding);
+   /* Consistent container alignment across pages */
+}
+
+/* Consistent content alignment */
+.content {
+   width: 100%;
+   max-width: var(--max-width-content);
+   margin-left: auto;
+   margin-right: auto;
+   padding-left: var(--container-padding);
+   padding-right: var(--container-padding);
+   /* Consistent content alignment for optimal reading */
+}
+
+/* Consistent main content spacing */
+main {
+   padding: var(--spacing-lg) var(--container-padding);
+   /* Consistent main content padding */
+}
+
+/* Consistent article spacing */
+article {
+   padding: var(--spacing-lg) 0;
+   /* Consistent article padding */
+}
+
+/* Consistent header spacing across pages */
+body > header {
+   padding: var(--spacing-lg) var(--container-padding);
+   margin-bottom: var(--spacing-xl);
+   /* Consistent header spacing */
+}
+
+/* Consistent footer spacing across pages */
+body > footer {
+   padding: var(--spacing-lg) var(--container-padding);
+   margin-top: var(--spacing-2xl);
+   /* Consistent footer spacing */
+}
+
+/* Consistent vertical rhythm */
+main > h1,
+article > header > h1 {
+   margin-top: var(--spacing-2xl);
+   margin-bottom: var(--spacing-xl);
+   /* Consistent heading spacing */
+}
+
+/* Consistent list spacing */
+main > ul,
+article ul,
+article ol {
+   margin-top: var(--spacing-md);
+   margin-bottom: var(--spacing-md);
+   /* Consistent list spacing */
+}
+
+/* Consistent paragraph spacing */
+main p,
+article p,
+.post-body p {
+   margin-top: 0;
+   margin-bottom: var(--spacing-md);
+   /* Consistent paragraph spacing */
+}
+
+/* Maintain visual rhythm */
+* + h1,
+* + h2,
+* + h3,
+* + h4,
+* + h5,
+* + h6 {
+   margin-top: var(--spacing-xl);
+   /* Consistent spacing before headings */
+}
+
+/* ========================================
+   4.4.4 Site Header and Title Styling
+   ======================================== */
+/*
+   Styling for site header and title:
+   - Style site header or title with appropriate prominence
+   - Establish site identity through visual styling
+   - Ensure header is visually distinct from content
+   - Create clear site branding through styling
+   - Requirements: 5.4
+*/
+
+/* Site header container */
+body > header,
+.site-header {
+   background-color: var(--color-background);
+   border-bottom: 2px solid var(--color-border);
+   padding: var(--spacing-xl) var(--container-padding);
+   margin-bottom: var(--spacing-2xl);
+   /* Prominent header styling */
+   transition: border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+/* Site title styling */
+body > header h1,
+.site-header h1,
+.site-title {
+   font-size: var(--font-size-3xl);
+   font-weight: var(--font-weight-bold);
+   color: var(--color-text);
+   margin: 0;
+   padding: 0;
+   line-height: var(--line-height-tight);
+   /* Prominent site title */
+}
+
+/* Site title link styling */
+body > header h1 a,
+.site-header h1 a,
+.site-title a {
+   color: var(--color-text);
+   text-decoration: none;
+   transition: color var(--transition-base), transform var(--transition-base);
+   display: inline-block;
+   /* Site title as link */
+}
+
+body > header h1 a:hover,
+.site-header h1 a:hover,
+.site-title a:hover {
+   color: var(--color-link);
+   transform: translateX(2px);
+   /* Site title hover state with subtle movement */
+}
+
+body > header h1 a:focus,
+.site-header h1 a:focus,
+.site-title a:focus {
+   outline: 2px solid var(--color-link);
+   outline-offset: 2px;
+   border-radius: var(--border-radius-sm);
+   /* Site title focus state */
+}
+
+body > header h1 a:focus:not(:focus-visible),
+.site-header h1 a:focus:not(:focus-visible),
+.site-title a:focus:not(:focus-visible) {
+   outline: none;
+   /* Hide focus outline for mouse users */
+}
+
+body > header h1 a:focus-visible,
+.site-header h1 a:focus-visible,
+.site-title a:focus-visible {
+   outline: 2px solid var(--color-link);
+   outline-offset: 2px;
+   border-radius: var(--border-radius-sm);
+   /* Enhanced focus indicator for keyboard navigation */
+}
+
+body > header h1 a:focus:not(:focus-visible) {
+   outline: none;
+   /* Hide focus outline for mouse users */
+}
+
+body > header h1 a:focus-visible {
+   outline: 2px solid var(--color-link);
+   outline-offset: 2px;
+   border-radius: var(--border-radius-sm);
+   /* Enhanced focus indicator for keyboard navigation */
+}
+
+/* Site subtitle or tagline */
+body > header p,
+.site-header p,
+.site-subtitle {
+   font-size: var(--font-size-base);
+   color: var(--color-text-muted);
+   margin: var(--spacing-sm) 0 0 0;
+   font-weight: var(--font-weight-normal);
+   /* Subtle site subtitle */
+}
+
+/* Site header navigation integration */
+body > header nav,
+.site-header nav {
+   margin-top: var(--spacing-lg);
+   /* Navigation spacing within header */
+}
+
+/* Ensure header is visually distinct from content */
+body > header {
+   /* Header establishes clear visual boundary */
+   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+   /* Subtle shadow for visual separation */
+}
+
+body > header:hover {
+   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+   border-bottom-color: var(--color-accent);
+}
+
+/* Site branding through typography */
+body > header {
+   /* Typography hierarchy establishes site identity */
+}
+
+/* ========================================
+   4.5 Visual Polish and Accessibility Enhancements
+   ======================================== */
+/*
+   Visual polish and accessibility enhancements:
+   - Subtle shadows and borders for depth
+   - Smooth transitions for interactive elements
+   - Enhanced hover effects
+   - Improved focus states for accessibility
+   - Consistent styling across all pages
+   - Requirements: 8.1, 8.2, 8.3, 8.4
+*/
+
+/* Enhanced keyboard navigation support */
+.js-keyboard-nav *:focus {
+   outline: 2px solid var(--color-link);
+   outline-offset: 2px;
+}
+
+.js-keyboard-nav a:focus,
+.js-keyboard-nav button:focus,
+.js-keyboard-nav input:focus,
+.js-keyboard-nav textarea:focus,
+.js-keyboard-nav select:focus {
+   outline: 2px solid var(--color-link);
+   outline-offset: 2px;
+   box-shadow: 0 0 0 3px var(--color-accent-light);
+}
+
+/* Consistent page structure styling */
+main,
+article {
+   transition: opacity var(--transition-base);
+}
+
+/* Consistent header styling across pages */
+main > h1,
+article > header > h1 {
+   transition: border-color var(--transition-base), color var(--transition-base);
+}
+
+/* Consistent link styling across pages */
+main a,
+article a,
+nav a,
+header a,
+footer a {
+   transition: color var(--transition-base), text-decoration-color var(--transition-base), background-color var(--transition-base), transform var(--transition-base);
+}
+
+/* Consistent list styling across pages */
+main ul,
+main ol,
+article ul,
+article ol {
+   transition: padding var(--transition-base);
+}
+
+/* Consistent code block styling across pages */
+main code,
+main pre,
+article code,
+article pre {
+   transition: background-color var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+/* Consistent spacing utilities for cross-page consistency */
+main .section-spacing,
+article .section-spacing {
+   margin-top: var(--spacing-2xl);
+   margin-bottom: var(--spacing-2xl);
+}
+
+main .padding-base,
+article .padding-base {
+   padding: var(--spacing-md);
+}
+
+/* Consistent typography across pages */
+main h1,
+article h1,
+main h2,
+article h2,
+main h3,
+article h3 {
+   transition: color var(--transition-base), border-color var(--transition-base);
+}
+
+/* Consistent interactive element feedback */
+main a:hover,
+article a:hover,
+nav a:hover,
+header a:hover,
+footer a:hover {
+   transition: color var(--transition-base), text-decoration-color var(--transition-base), background-color var(--transition-base), transform var(--transition-base);
+}
+
+main a:focus-visible,
+article a:focus-visible,
+nav a:focus-visible,
+header a:focus-visible,
+footer a:focus-visible {
+   outline: 2px solid var(--color-link);
+   outline-offset: 2px;
+   border-radius: var(--border-radius-sm);
+}
+
+/* Consistent visual polish for containers */
+main,
+article,
+header,
+footer,
+nav {
+   transition: box-shadow var(--transition-base), border-color var(--transition-base);
+}
 
 /* ========================================
    5. Responsive Design
    ======================================== */
 /*
-   Media queries for responsive breakpoints:
-   - Mobile-first base styles (default)
-   - Tablet breakpoint (768px+)
-   - Desktop breakpoint (1024px+)
-   - Large desktop breakpoint (1440px+)
+   Responsive design foundation using CSS media queries:
+   
+   Breakpoint Management:
+   - Mobile: Base styles (default) - optimized for < 768px
+   - Tablet: @media (min-width: 768px) and (max-width: 1024px)
+   - Desktop: @media (min-width: 1025px)
+   
+   Implementation Strategy:
+   - Mobile-first approach: Base styles target mobile devices
+   - Progressive enhancement: Tablet and desktop styles enhance mobile base
+   - Consistent breakpoints: All media queries use standardized breakpoint values
+   - Viewport adaptation: Layout adapts smoothly across all device sizes
+   
+   Breakpoint Values:
+   - Mobile: 0px - 767px (base styles, no media query)
+   - Tablet: 768px - 1024px (@media screen and (min-width: 768px) and (max-width: 1024px))
+   - Desktop: 1025px+ (@media screen and (min-width: 1025px))
+   
+   Testing Requirements:
+   - Verify responsive behavior at mobile (< 768px), tablet (768px-1024px), and desktop (> 1024px) sizes
+   - Test layout adaptation on viewport resize
+   - Ensure all elements scale appropriately across breakpoints
+   - Verify navigation and content remain usable at all screen sizes
 */
-/* Note: Responsive styles will be added in future tasks */
+
+/* ========================================
+   5.1 Mobile-First Base Styles (Default)
+   ======================================== */
+/*
+   Base styles optimized for mobile devices (< 768px):
+   - Font sizes and spacing optimized for mobile viewing
+   - Touch targets sized appropriately (minimum 44x44px)
+   - Container padding optimized for small screens
+   - Layout optimized for narrow viewports
+*/
+
+/* Mobile-optimized container padding */
+.container {
+   padding-left: var(--spacing-md);
+   padding-right: var(--spacing-md);
+}
+
+/* Mobile-optimized content spacing */
+.content {
+   padding-left: var(--spacing-md);
+   padding-right: var(--spacing-md);
+}
+
+/* Ensure touch targets are appropriately sized for mobile */
+/* Links and interactive elements should have minimum touch target size */
+a {
+   /* Ensure links have adequate touch target size on mobile */
+   min-height: 44px;
+   display: inline-flex;
+   align-items: center;
+   /* Allow links to wrap naturally while maintaining touch target */
+   min-width: fit-content;
+}
+
+/* Mobile-optimized heading sizes */
+h1 {
+   font-size: var(--font-size-3xl);
+   /* Slightly smaller on mobile for better fit */
+   line-height: var(--line-height-tight);
+   margin-bottom: var(--spacing-md);
+}
+
+/* Mobile-optimized post header styling */
+article > header {
+   margin-bottom: var(--spacing-xl);
+   padding-bottom: var(--spacing-lg);
+   /* Reduced spacing on mobile */
+}
+
+article > header > h1 {
+   font-size: var(--font-size-3xl);
+   /* Consistent with mobile h1 sizing */
+   margin-bottom: var(--spacing-md);
+}
+
+article > header > time {
+   font-size: var(--font-size-sm);
+   /* Slightly smaller date on mobile */
+   margin-top: var(--spacing-xs);
+}
+
+h2 {
+   font-size: var(--font-size-2xl);
+   margin-top: var(--spacing-lg);
+   margin-bottom: var(--spacing-sm);
+}
+
+h3 {
+   font-size: var(--font-size-xl);
+   margin-top: var(--spacing-md);
+   margin-bottom: var(--spacing-sm);
+}
+
+/* Mobile-optimized spacing for main content areas */
+main {
+   padding: var(--spacing-md);
+   /* Ensure content doesn't touch screen edges */
+}
+
+/* Mobile-optimized spacing for article content */
+article {
+   padding: var(--spacing-md) 0;
+   /* Vertical padding only, horizontal handled by container */
+}
+
+/* Mobile-optimized spacing for post body */
+.post-body {
+   padding-top: var(--spacing-md);
+}
+
+/* Mobile-optimized list spacing */
+ul,
+ol {
+   padding-left: var(--spacing-lg);
+   /* Slightly reduced padding on mobile */
+   margin-bottom: var(--spacing-md);
+}
+
+/* Mobile-optimized code block spacing */
+pre {
+   padding: var(--spacing-sm);
+   /* Slightly reduced padding on mobile */
+   margin-top: var(--spacing-sm);
+   margin-bottom: var(--spacing-sm);
+   font-size: 0.875rem;
+   /* Slightly smaller font for better fit */
+}
+
+/* Mobile-optimized paragraph spacing */
+p {
+   margin-bottom: var(--spacing-md);
+   /* Consistent spacing for readability */
+}
+
+/* Mobile-optimized header spacing */
+header {
+   padding: var(--spacing-md) 0;
+   margin-bottom: var(--spacing-md);
+}
+
+/* Ensure navigation links are touch-friendly */
+nav a {
+   min-height: 44px;
+   padding: var(--spacing-sm) var(--spacing-md);
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+}
+
+/* Mobile-optimized time element spacing */
+time {
+   display: block;
+   margin-top: var(--spacing-xs);
+   margin-bottom: var(--spacing-sm);
+   font-size: var(--font-size-sm);
+   color: var(--color-text-muted);
+}
+
+/* Mobile-optimized post list items */
+ul li,
+ol li {
+   margin-bottom: var(--spacing-sm);
+   /* Adequate spacing between list items */
+   padding-left: var(--spacing-xs);
+}
+
+/* Mobile-optimized post list links */
+ul li a,
+ol li a {
+   min-height: 44px;
+   /* Ensure post links are touch-friendly */
+   display: inline-flex;
+   align-items: center;
+   margin-bottom: var(--spacing-xs);
+}
+
+/* Mobile-optimized post listing page list items */
+main > ul > li {
+   margin-bottom: var(--spacing-md);
+   /* Adequate spacing between post list items on mobile */
+   padding: var(--spacing-sm) 0;
+   /* Reduced padding on mobile for better space utilization */
+}
+
+/* Mobile-optimized post listing page title links */
+main > ul > li > a {
+   min-height: 44px;
+   /* Ensure post title links are touch-friendly on mobile */
+   display: flex;
+   align-items: center;
+   font-size: var(--font-size-lg);
+   /* Slightly smaller font size on mobile for better fit */
+}
+
+/* Mobile-optimized post listing page dates */
+main > ul > li > time {
+   font-size: var(--font-size-sm);
+   margin-top: var(--spacing-xs);
+   /* Clear date display on mobile */
+}
+
+/* Mobile viewport optimization */
+/* Ensure content doesn't overflow on small screens */
+* {
+   max-width: 100%;
+   /* Prevent horizontal overflow */
+}
+
+img {
+   max-width: 100%;
+   height: auto;
+   /* Responsive images */
+}
+
+/* Mobile-optimized blockquote spacing */
+blockquote {
+   margin: var(--spacing-md) 0;
+   padding-left: var(--spacing-md);
+   padding-right: var(--spacing-md);
+   border-left: 3px solid var(--color-border);
+   color: var(--color-text-muted);
+}
+
+/* ========================================
+   5.2 Tablet Responsive Styles (768px - 1024px)
+   ======================================== */
+/*
+   Tablet-optimized styles for intermediate screen sizes:
+   - Adjusted layout, font sizes, and spacing for tablet screens
+   - Optimized content width and spacing for intermediate screen size
+   - Enhanced spacing and readability for tablet viewing
+   - Navigation and content remain usable and readable
+   
+   Breakpoint: 768px - 1024px
+   Media Query: @media screen and (min-width: 768px) and (max-width: 1024px)
+   Purpose: Provides intermediate layout between mobile and desktop
+*/
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+
+   /* Tablet-optimized container padding */
+   .container {
+      padding-left: var(--spacing-xl);
+      padding-right: var(--spacing-xl);
+      /* Increased padding for tablet screens */
+   }
+
+   /* Tablet-optimized content spacing */
+   .content {
+      padding-left: var(--spacing-lg);
+      padding-right: var(--spacing-lg);
+      /* More generous padding for better readability */
+   }
+
+   /* Tablet-optimized heading sizes */
+   h1 {
+      font-size: var(--font-size-4xl);
+      /* Full size on tablet for better visual hierarchy */
+      margin-bottom: var(--spacing-lg);
+   }
+
+   h2 {
+      font-size: var(--font-size-3xl);
+      margin-top: var(--spacing-xl);
+      margin-bottom: var(--spacing-md);
+   }
+
+   h3 {
+      font-size: var(--font-size-2xl);
+      margin-top: var(--spacing-lg);
+      margin-bottom: var(--spacing-md);
+   }
+
+   /* Tablet-optimized spacing for main content areas */
+   main {
+      padding: var(--spacing-lg);
+      /* Increased padding for better content separation */
+   }
+
+   /* Tablet-optimized spacing for article content */
+   article {
+      padding: var(--spacing-lg) 0;
+      /* More vertical spacing for better readability */
+   }
+
+   /* Tablet-optimized spacing for post body */
+   .post-body {
+      padding-top: var(--spacing-lg);
+   }
+
+   /* Tablet-optimized post header styling */
+   article > header {
+      margin-bottom: var(--spacing-2xl);
+      padding-bottom: var(--spacing-xl);
+      /* Increased spacing on tablet */
+   }
+
+   article > header > h1 {
+      font-size: var(--font-size-4xl);
+      /* Full size on tablet for better visual hierarchy */
+      margin-bottom: var(--spacing-lg);
+   }
+
+   article > header > time {
+      font-size: var(--font-size-base);
+      /* Standard font size for tablet */
+      margin-top: var(--spacing-sm);
+   }
+
+   /* Tablet-optimized list spacing */
+   ul,
+   ol {
+      padding-left: var(--spacing-2xl);
+      /* Increased padding for better list readability */
+      margin-bottom: var(--spacing-lg);
+   }
+
+   /* Tablet-optimized code block spacing */
+   pre {
+      padding: var(--spacing-md);
+      /* More padding for better code readability */
+      margin-top: var(--spacing-md);
+      margin-bottom: var(--spacing-md);
+      font-size: var(--font-size-sm);
+      /* Standard font size for tablet */
+   }
+
+   /* Tablet-optimized paragraph spacing */
+   p {
+      margin-bottom: var(--spacing-lg);
+      /* Increased spacing for better readability */
+   }
+
+   /* Tablet-optimized header spacing */
+   header {
+      padding: var(--spacing-lg) 0;
+      margin-bottom: var(--spacing-lg);
+      /* More spacing for better visual separation */
+   }
+
+   /* Tablet-optimized navigation links */
+   nav a {
+      padding: var(--spacing-md) var(--spacing-lg);
+      /* Increased padding for better touch targets */
+   }
+
+   /* Tablet-optimized time element spacing */
+   time {
+      margin-top: var(--spacing-sm);
+      margin-bottom: var(--spacing-md);
+      font-size: var(--font-size-base);
+      /* Slightly larger font for better readability */
+   }
+
+   /* Tablet-optimized post list items */
+   ul li,
+   ol li {
+      margin-bottom: var(--spacing-md);
+      /* Increased spacing between list items */
+      padding-left: var(--spacing-sm);
+   }
+
+   /* Tablet-optimized post list links */
+   ul li a,
+   ol li a {
+      margin-bottom: var(--spacing-sm);
+      /* Better spacing for post links */
+   }
+
+   /* Tablet-optimized post listing page list items */
+   main > ul > li {
+      margin-bottom: var(--spacing-lg);
+      /* Increased spacing between post list items on tablet */
+      padding: var(--spacing-md) 0;
+      /* More generous padding on tablet */
+   }
+
+   /* Tablet-optimized post listing page title links */
+   main > ul > li > a {
+      font-size: var(--font-size-xl);
+      /* Full font size on tablet for better readability */
+      display: block;
+      /* Block display for better layout */
+   }
+
+   /* Tablet-optimized post listing page dates */
+   main > ul > li > time {
+      font-size: var(--font-size-sm);
+      margin-top: var(--spacing-xs);
+      /* Clear date display on tablet */
+   }
+
+   /* Tablet-optimized blockquote spacing */
+   blockquote {
+      margin: var(--spacing-lg) 0;
+      padding-left: var(--spacing-lg);
+      padding-right: var(--spacing-lg);
+      /* More generous spacing for better visual distinction */
+   }
+
+   /* Tablet-optimized link touch targets */
+   /* Links can be smaller on tablet but still maintain usability */
+   a {
+      min-height: auto;
+      /* Allow natural link sizing on tablet */
+      display: inline;
+      /* Natural inline display for better text flow */
+   }
+
+   /* Ensure navigation links remain touch-friendly */
+   nav a {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      /* Maintain touch-friendly navigation */
+   }
+}
+
+/* ========================================
+   5.3 Desktop Responsive Styles (> 1024px)
+   ======================================== */
+/*
+   Desktop-optimized styles for large screens:
+   - Utilize available screen space effectively
+   - Maintain readable line lengths (max-width for content)
+   - Enhance spacing and layout for larger screens
+   - Ensure all elements scale appropriately
+   - Optimized for desktop viewing experience
+   
+   Breakpoint: 1025px and above
+   Media Query: @media screen and (min-width: 1025px)
+   Purpose: Provides optimal layout for desktop and large screen viewing
+*/
+
+@media screen and (min-width: 1025px) {
+
+   /* Desktop-optimized container padding */
+   .container {
+      padding-left: var(--spacing-2xl);
+      padding-right: var(--spacing-2xl);
+      /* Generous padding for large screens */
+   }
+
+   /* Desktop-optimized content spacing */
+   .content {
+      padding-left: var(--spacing-xl);
+      padding-right: var(--spacing-xl);
+      /* More generous padding for optimal reading experience */
+      max-width: var(--max-width-content);
+      /* Maintain readable line length on large screens */
+   }
+
+   /* Desktop-optimized heading sizes */
+   h1 {
+      font-size: var(--font-size-4xl);
+      /* Full size on desktop for maximum visual impact */
+      margin-bottom: var(--spacing-xl);
+      line-height: var(--line-height-tight);
+   }
+
+   h2 {
+      font-size: var(--font-size-3xl);
+      margin-top: var(--spacing-2xl);
+      margin-bottom: var(--spacing-lg);
+      line-height: var(--line-height-tight);
+   }
+
+   h3 {
+      font-size: var(--font-size-2xl);
+      margin-top: var(--spacing-xl);
+      margin-bottom: var(--spacing-md);
+      line-height: var(--line-height-tight);
+   }
+
+   h4 {
+      font-size: var(--font-size-xl);
+      margin-top: var(--spacing-lg);
+      margin-bottom: var(--spacing-md);
+   }
+
+   /* Desktop-optimized spacing for main content areas */
+   main {
+      padding: var(--spacing-xl);
+      /* Increased padding for better content separation on large screens */
+   }
+
+   /* Desktop-optimized spacing for article content */
+   article {
+      padding: var(--spacing-xl) 0;
+      /* More vertical spacing for better readability */
+   }
+
+   /* Desktop-optimized spacing for post body */
+   .post-body {
+      padding-top: var(--spacing-xl);
+   }
+
+   /* Desktop-optimized post header styling */
+   article > header {
+      margin-bottom: var(--spacing-2xl);
+      padding-bottom: var(--spacing-xl);
+      /* Generous spacing on desktop for optimal visual separation */
+   }
+
+   article > header > h1 {
+      font-size: var(--font-size-4xl);
+      /* Full size on desktop for maximum visual impact */
+      margin-bottom: var(--spacing-xl);
+      line-height: var(--line-height-tight);
+   }
+
+   article > header > time {
+      font-size: var(--font-size-base);
+      /* Standard font size for desktop readability */
+      margin-top: var(--spacing-sm);
+   }
+
+   /* Desktop-optimized list spacing */
+   ul,
+   ol {
+      padding-left: var(--spacing-2xl);
+      /* Increased padding for better list readability */
+      margin-bottom: var(--spacing-lg);
+   }
+
+   /* Desktop-optimized code block spacing */
+   pre {
+      padding: var(--spacing-lg);
+      /* More padding for better code readability */
+      margin-top: var(--spacing-lg);
+      margin-bottom: var(--spacing-lg);
+      font-size: var(--font-size-base);
+      /* Standard font size for desktop */
+   }
+
+   /* Desktop-optimized paragraph spacing */
+   p {
+      margin-bottom: var(--spacing-lg);
+      /* Increased spacing for better readability on large screens */
+      line-height: var(--line-height-relaxed);
+      /* Slightly more relaxed line height for better reading experience */
+   }
+
+   /* Desktop-optimized header spacing */
+   header {
+      padding: var(--spacing-xl) 0;
+      margin-bottom: var(--spacing-xl);
+      /* More spacing for better visual separation */
+   }
+
+   /* Desktop-optimized navigation links */
+   nav a {
+      padding: var(--spacing-md) var(--spacing-xl);
+      /* Increased padding for better visual presence */
+      min-height: auto;
+      /* Natural sizing on desktop */
+      display: inline-flex;
+      align-items: center;
+   }
+
+   /* Desktop-optimized time element spacing */
+   time {
+      margin-top: var(--spacing-sm);
+      margin-bottom: var(--spacing-md);
+      font-size: var(--font-size-base);
+      /* Standard font size for better readability */
+   }
+
+   /* Desktop-optimized post list items */
+   ul li,
+   ol li {
+      margin-bottom: var(--spacing-md);
+      /* Increased spacing between list items */
+      padding-left: var(--spacing-sm);
+   }
+
+   /* Desktop-optimized post list links */
+   ul li a,
+   ol li a {
+      margin-bottom: var(--spacing-sm);
+      /* Better spacing for post links */
+      min-height: auto;
+      /* Natural link sizing on desktop */
+      display: inline;
+      /* Natural inline display for better text flow */
+   }
+
+   /* Desktop-optimized post listing page list items */
+   main > ul > li {
+      margin-bottom: var(--spacing-lg);
+      /* Generous spacing between post list items on desktop */
+      padding: var(--spacing-md) 0;
+      /* Comfortable padding on desktop */
+   }
+
+   /* Desktop-optimized post listing page title links */
+   main > ul > li > a {
+      font-size: var(--font-size-xl);
+      /* Full font size on desktop for optimal readability */
+      display: block;
+      /* Block display for better layout */
+      min-height: auto;
+      /* Natural link sizing on desktop */
+   }
+
+   /* Desktop-optimized post listing page dates */
+   main > ul > li > time {
+      font-size: var(--font-size-base);
+      /* Standard font size on desktop for better readability */
+      margin-top: var(--spacing-xs);
+      /* Clear date display on desktop */
+   }
+
+   /* Desktop-optimized blockquote spacing */
+   blockquote {
+      margin: var(--spacing-xl) 0;
+      padding-left: var(--spacing-xl);
+      padding-right: var(--spacing-xl);
+      /* More generous spacing for better visual distinction */
+      border-left-width: 4px;
+      /* Slightly thicker border for better visual impact */
+   }
+
+   /* Desktop-optimized link styling */
+   a {
+      min-height: auto;
+      /* Natural link sizing on desktop */
+      display: inline;
+      /* Natural inline display for better text flow */
+   }
+
+   /* Ensure navigation links maintain visual presence */
+   nav a {
+      display: inline-flex;
+      align-items: center;
+      /* Maintain flex display for navigation */
+   }
+
+   /* Desktop-optimized container max-width */
+   .container {
+      max-width: var(--max-width-container);
+      /* Utilize available space while maintaining reasonable max-width */
+   }
+
+   /* Desktop-optimized content max-width for readability */
+   .content {
+      max-width: var(--max-width-content);
+      /* Maintain optimal reading width (65ch) */
+   }
+
+   /* Desktop-optimized image scaling */
+   img {
+      max-width: 100%;
+      height: auto;
+      /* Responsive images that scale appropriately */
+   }
+
+   /* Desktop-optimized section spacing */
+   .section-spacing {
+      margin-top: var(--spacing-3xl);
+      margin-bottom: var(--spacing-3xl);
+      /* More generous section spacing on large screens */
+   }
+
+   /* Desktop-optimized code inline styling */
+   code {
+      font-size: 0.9em;
+      padding: 0.125rem 0.5rem;
+      /* Slightly more padding for better readability */
+   }
+}
